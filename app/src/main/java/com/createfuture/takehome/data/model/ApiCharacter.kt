@@ -1,4 +1,4 @@
-package com.createfuture.takehome.models
+package com.createfuture.takehome.data.model
 
 data class ApiCharacter(
     val name: String,

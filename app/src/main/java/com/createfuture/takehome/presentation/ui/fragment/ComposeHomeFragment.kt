@@ -1,4 +1,4 @@
-package com.createfuture.takehome.ui.home
+package com.createfuture.takehome.presentation.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.createfuture.takehome.R
-import com.createfuture.takehome.models.ApiCharacter
+import com.createfuture.takehome.data.model.ApiCharacter
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
