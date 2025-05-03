@@ -1,6 +1,6 @@
-package com.createfuture.takehome.data.model
+package com.createfuture.takehome.data.model.response
 
-data class ApiCharacter(
+data class ApiCharacterResponseDto(
     val name: String,
     val gender: String,
     val culture: String,
