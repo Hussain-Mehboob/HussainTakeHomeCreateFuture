@@ -86,22 +86,6 @@ fun CharactersListScreen() {
     }
 }
 
-fun getSeasons(character: ApiCharacter): String {
-    return character.tvSeries.joinToString {
-        when (it) {
-            "Season 1" -> "I"
-            "Season 2" -> "II"
-            "Season 3" -> "III"
-            "Season 4" -> "IV"
-            "Season 5" -> "V"
-            "Season 6" -> "VI"
-            "Season 7" -> "VII"
-            "Season 8" -> "VIII"
-            else -> ""
-        }
-    }
-}
-
 @Composable
 fun CharacterItem(character: ApiCharacter, onItemClick: () -> Unit = {}) {
     Card(
@@ -142,7 +126,7 @@ fun CharacterItem(character: ApiCharacter, onItemClick: () -> Unit = {}) {
                     fontSize = 16.sp
                 )
                 Text(
-                    text = getSeasons(character),
+                    text = character.seasons,
                     color = Color.Gray,
                     fontWeight = FontWeight.Normal,
                     fontSize = 14.sp,
@@ -152,7 +136,6 @@ fun CharacterItem(character: ApiCharacter, onItemClick: () -> Unit = {}) {
             }
         }
     }
-
 }
 
 @Composable
