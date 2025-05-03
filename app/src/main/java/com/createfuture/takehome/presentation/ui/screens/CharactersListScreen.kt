@@ -1,6 +1,5 @@
 package com.createfuture.takehome.presentation.ui.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,11 +21,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.createfuture.takehome.R
 import com.createfuture.takehome.domain.model.ApiCharacter
 import com.createfuture.takehome.presentation.common.intent.CharactersIntent
 import com.createfuture.takehome.presentation.common.state.CharactersState
@@ -47,7 +50,10 @@ fun CharactersListScreen() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
+                .paint(
+                    painterResource(id = R.drawable.img_characters),
+                    contentScale = ContentScale.FillBounds
+                )
         ) {
             when (charactersState) {
                 is CharactersState.Error -> ErrorDialog(errorMessage = charactersState.error) { /*Do Nothing*/ }
