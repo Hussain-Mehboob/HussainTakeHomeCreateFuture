@@ -6,14 +6,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +26,8 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -60,14 +63,15 @@ fun CharactersListScreen() {
                 is CharactersState.GetCharactersListSuccess -> {
                     LazyColumn(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(4.dp)
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp, vertical = 6.dp)
                     ) {
                         with(charactersState.data) {
                             items(this) { character ->
                                 CharacterItem(character) {
-                                    //Do Nothing
+                                    //Do Nothing On Click
                                 }
+                                HorizontalDivider(color = Color.Gray.copy(alpha = 0.4f))
                             }
                         }
                     }
@@ -82,77 +86,92 @@ fun CharactersListScreen() {
     }
 }
 
+fun getSeasons(character: ApiCharacter): String {
+    return character.tvSeries.joinToString {
+        when (it) {
+            "Season 1" -> "I"
+            "Season 2" -> "II"
+            "Season 3" -> "III"
+            "Season 4" -> "IV"
+            "Season 5" -> "V"
+            "Season 6" -> "VI"
+            "Season 7" -> "VII"
+            "Season 8" -> "VIII"
+            else -> ""
+        }
+    }
+}
+
 @Composable
 fun CharacterItem(character: ApiCharacter, onItemClick: () -> Unit = {}) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 6.dp),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+            .padding(top = 8.dp, bottom = 4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.Transparent
+        ),
+        elevation = CardDefaults.cardElevation(0.dp),
         onClick = onItemClick
     ) {
-        Row {
-            Spacer(modifier = Modifier.size(16.dp))
-            Column {
-                Text(text = character.name, color = Color.White, fontSize = 16.sp)
-                Row {
-                    Text(text = "Culture: ", color = Color.White, fontSize = 16.sp)
-                    Text(
-                        text = character.culture, color = Color.White, fontSize = 16.sp
-                    )
-                }
-                Row {
-                    Text("Born: ", color = Color.White, fontSize = 16.sp)
-                    Text(
-                        text = character.born, color = Color.White, fontSize = 16.sp
-                    )
-                }
-                Row {
-                    Text(text = "Died: ", color = Color.White, fontSize = 16.sp)
-                    Text(
-                        text = character.died, color = Color.White, fontSize = 16.sp
-                    )
-                }
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            // Left Section
+            Column(modifier = Modifier.weight(0.7f)) {
+                Text(
+                    text = character.name,
+                    color = Color.White,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 20.sp
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                LabelValue(label = "Culture: ", value = character.culture)
+                LabelValue(label = "Born: ", value = character.born)
+                LabelValue(label = "Died: ", value = character.died)
             }
-            Spacer(modifier = Modifier.weight(1f))
-            Column {
-                Text("Seasons: ", color = Color.White, fontSize = 14.sp)
-                var seasons = character.tvSeries.joinToString {
-                    when (it) {
-                        "Season 1" -> "I "
-                        "Season 2" -> "II, "
-                        "Season 3" -> "III, "
-                        "Season 4" -> "IV, "
-                        "Season 5" -> "V, "
-                        "Season 6" -> "VI, "
-                        "Season 7" -> "VII, "
-                        "Season 8" -> "VIII"
-                        else -> ""
-                    }
-                }
-                Text(seasons, color = Color.White, fontSize = 14.sp)
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            // Right Section
+            Column(horizontalAlignment = Alignment.End, modifier = Modifier.weight(0.3f)) {
+                Text(
+                    text = "Seasons:",
+                    color = Color.White,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 16.sp
+                )
+                Text(
+                    text = getSeasons(character),
+                    color = Color.Gray,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 14.sp,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
         }
-        Spacer(modifier = Modifier.size(18.dp))/* Column(
-             modifier = Modifier
-                 .fillMaxSize()
-                 .paint(
-                     painterResource(id = R.drawable.img_characters),
-                     contentScale = ContentScale.FillBounds
-                 )
-                 .verticalScroll(rememberScrollState())
-         ) {
-             if (charactersBody.value != null) {
-                 for (character in charactersBody.value!!) {
+    }
 
-                 }
-             }
-         }*/
+}
+
+@Composable
+fun LabelValue(label: String, value: String) {
+    Row {
+        Text(
+            text = label, color = Color.White, fontSize = 16.sp
+        )
+        Text(
+            text = value,
+            color = Color.Gray,
+            fontSize = 16.sp,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, backgroundColor = 0xFF000000)
 @Composable
 fun PreviewCharacterItem() {
     val dummyCharacter = ApiCharacter("123", "Savings", "001", "USD", "2024-01-01")
