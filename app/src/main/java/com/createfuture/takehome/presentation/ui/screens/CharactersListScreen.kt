@@ -44,34 +44,35 @@ fun CharactersListScreen() {
     }
 
     MaterialTheme {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background)
-            ) {
-                when(charactersState) {
-                    is CharactersState.Error -> ErrorDialog(errorMessage = charactersState.error) { /*Do Nothing*/ }
-                    is CharactersState.GetCharactersListSuccess -> {
-                        LazyColumn(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(4.dp)
-                        ) {
-                            with(charactersState.data) {
-                                items(this) { character ->
-                                    CharacterItem(character) {
-                                        //Do Nothing
-                                    }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+        ) {
+            when (charactersState) {
+                is CharactersState.Error -> ErrorDialog(errorMessage = charactersState.error) { /*Do Nothing*/ }
+                is CharactersState.GetCharactersListSuccess -> {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(4.dp)
+                    ) {
+                        with(charactersState.data) {
+                            items(this) { character ->
+                                CharacterItem(character) {
+                                    //Do Nothing
                                 }
                             }
                         }
                     }
-                    CharactersState.Init -> {}
-                    CharactersState.Loading -> CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center)
-                    )
                 }
+
+                CharactersState.Init -> {}
+                CharactersState.Loading -> CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center)
+                )
             }
+        }
     }
 }
 
@@ -92,25 +93,19 @@ fun CharacterItem(character: ApiCharacter, onItemClick: () -> Unit = {}) {
                 Row {
                     Text(text = "Culture: ", color = Color.White, fontSize = 16.sp)
                     Text(
-                        text = character.culture,
-                        color = Color.White,
-                        fontSize = 16.sp
+                        text = character.culture, color = Color.White, fontSize = 16.sp
                     )
                 }
                 Row {
                     Text("Born: ", color = Color.White, fontSize = 16.sp)
                     Text(
-                        text = character.born,
-                        color = Color.White,
-                        fontSize = 16.sp
+                        text = character.born, color = Color.White, fontSize = 16.sp
                     )
                 }
                 Row {
                     Text(text = "Died: ", color = Color.White, fontSize = 16.sp)
                     Text(
-                        text = character.died,
-                        color = Color.White,
-                        fontSize = 16.sp
+                        text = character.died, color = Color.White, fontSize = 16.sp
                     )
                 }
             }
@@ -133,22 +128,21 @@ fun CharacterItem(character: ApiCharacter, onItemClick: () -> Unit = {}) {
                 Text(seasons, color = Color.White, fontSize = 14.sp)
             }
         }
-        Spacer(modifier = Modifier.size(18.dp))
-       /* Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .paint(
-                    painterResource(id = R.drawable.img_characters),
-                    contentScale = ContentScale.FillBounds
-                )
-                .verticalScroll(rememberScrollState())
-        ) {
-            if (charactersBody.value != null) {
-                for (character in charactersBody.value!!) {
+        Spacer(modifier = Modifier.size(18.dp))/* Column(
+             modifier = Modifier
+                 .fillMaxSize()
+                 .paint(
+                     painterResource(id = R.drawable.img_characters),
+                     contentScale = ContentScale.FillBounds
+                 )
+                 .verticalScroll(rememberScrollState())
+         ) {
+             if (charactersBody.value != null) {
+                 for (character in charactersBody.value!!) {
 
-                }
-            }
-        }*/
+                 }
+             }
+         }*/
     }
 }
 

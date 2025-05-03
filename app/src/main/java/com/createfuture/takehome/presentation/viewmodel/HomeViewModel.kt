@@ -19,7 +19,8 @@ class HomeViewModel @Inject constructor(
     private val getCharactersListUseCase: GetCharactersListUseCase,
 ) : ViewModel() {
 
-    private val _charactersState = MutableStateFlow<CharactersState<List<ApiCharacter>>>(CharactersState.Init)
+    private val _charactersState =
+        MutableStateFlow<CharactersState<List<ApiCharacter>>>(CharactersState.Init)
     val characters = _charactersState.asStateFlow()
 
     fun handleIntent(intent: CharactersIntent) {
@@ -27,6 +28,7 @@ class HomeViewModel @Inject constructor(
             is CharactersIntent.GetCharactersList -> getCharactersList()
         }
     }
+
     private fun getCharactersList() {
         _charactersState.value = CharactersState.Loading
         viewModelScope.launch {
@@ -34,12 +36,16 @@ class HomeViewModel @Inject constructor(
                 is ApiResult.Success -> {
                     //Deliberate Delay Added to show the state change
                     delay(3000)
-                    _charactersState.value = CharactersState.GetCharactersListSuccess(data = result.data)
+                    _charactersState.value =
+                        CharactersState.GetCharactersListSuccess(data = result.data)
                 }
+
                 is ApiResult.Error -> {
-                    _charactersState.value = CharactersState.Error(result.exception.message ?: "Unknown error")
+                    _charactersState.value =
+                        CharactersState.Error(result.exception.message ?: "Unknown error")
                 }
-                ApiResult.Loading ->  _charactersState.value = CharactersState.Loading
+
+                ApiResult.Loading -> _charactersState.value = CharactersState.Loading
             }
         }
     }

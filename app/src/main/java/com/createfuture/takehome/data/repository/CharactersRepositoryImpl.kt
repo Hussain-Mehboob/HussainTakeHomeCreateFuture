@@ -8,7 +8,8 @@ import com.createfuture.takehome.domain.repository.CharactersRepository
 import com.createfuture.takehome.utils.ApiResult
 import javax.inject.Inject
 
-class CharactersRepositoryImpl @Inject constructor(private val amazonApiService: AmazonApiService) : CharactersRepository {
+class CharactersRepositoryImpl @Inject constructor(private val amazonApiService: AmazonApiService) :
+    CharactersRepository {
 
     override suspend fun getCharacters(): ApiResult<List<ApiCharacter>> {
         return try {

@@ -21,14 +21,18 @@ fun ErrorDialog(errorMessage: String, onDismiss: () -> Unit) {
                 showDialog = false
                 onDismiss()
             },
-            title = { Text(
-                text = "Error",
-                style = MaterialTheme.typography.bodyLarge,
-            ) },
-            text = {  Text(
-                text = errorMessage,
-                style = MaterialTheme.typography.bodyMedium,
-            ) },
+            title = {
+                Text(
+                    text = "Error",
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+            },
+            text = {
+                Text(
+                    text = errorMessage,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            },
             confirmButton = {
                 Button(
                     onClick = {
