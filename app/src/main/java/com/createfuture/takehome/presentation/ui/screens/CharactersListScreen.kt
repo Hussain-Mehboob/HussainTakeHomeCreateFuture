@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -70,7 +71,7 @@ fun CharactersListScreen() {
                 is CharactersState.GetCharactersListSuccess -> CharacterListScreen(characters = charactersState.data)
                 CharactersState.Init -> {}
                 CharactersState.Loading -> CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier.align(Alignment.Center).testTag("loadingIndicator")
                 )
             }
         }
