@@ -1,5 +1,6 @@
 package com.createfuture.takehome.di
 
+import com.createfuture.takehome.BuildConfig
 import com.createfuture.takehome.data.remote.apiservice.AmazonApiService
 import com.createfuture.takehome.data.remote.interceptor.HeaderInterceptor
 import com.google.gson.Gson
@@ -43,7 +44,7 @@ class NetworkModule {
     @Provides
     fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://yj8ke8qonl.execute-api.eu-west-1.amazonaws.com")
+            .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
