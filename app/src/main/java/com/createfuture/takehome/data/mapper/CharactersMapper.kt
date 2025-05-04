@@ -3,19 +3,6 @@ package com.createfuture.takehome.data.mapper
 import com.createfuture.takehome.data.model.response.ApiCharacterResponseDto
 import com.createfuture.takehome.domain.model.ApiCharacter
 
-/*fun ApiCharacterResponseDto.toApiCharacter(): ApiCharacter {
-    return ApiCharacter(
-        name = this.name,
-        gender = this.gender,
-        culture = this.culture,
-        born = this.born,
-        died = this.died,
-        aliases = this.aliases,
-        tvSeries = this.tvSeries,
-        playedBy = this.playedBy,
-    )
-}*/
-
 class CharactersMapper : Mapper<ApiCharacterResponseDto, ApiCharacter> {
     override fun map(from: ApiCharacterResponseDto): ApiCharacter {
         return ApiCharacter(
