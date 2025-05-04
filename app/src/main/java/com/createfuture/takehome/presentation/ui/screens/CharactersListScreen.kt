@@ -207,6 +207,6 @@ fun LabelValue(label: String, value: String) {
 @Preview(showBackground = true, backgroundColor = 0xFF000000)
 @Composable
 fun PreviewCharacterItem() {
-    val dummyCharacter = ApiCharacter("123", "Savings", "001", "USD", "2024-01-01")
+    val dummyCharacter = ApiCharacter("Eddarkee", "Male", "Nothmen", "In 264 AC", "In 364 AC")
     CharacterItem(character = dummyCharacter)
 }

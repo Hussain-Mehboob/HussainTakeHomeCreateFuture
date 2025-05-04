@@ -6,7 +6,7 @@ data class ApiCharacterResponseDto(
     val culture: String,
     val born: String,
     val died: String,
-    val aliases: List<String>,
-    val tvSeries: List<String>,
-    val playedBy: List<String>,
+    val aliases: List<String> = mutableListOf(),
+    val tvSeries: List<String> = mutableListOf(),
+    val playedBy: List<String> = mutableListOf(),
 )
