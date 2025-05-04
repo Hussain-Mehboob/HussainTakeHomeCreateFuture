@@ -20,7 +20,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _charactersState =
-        MutableStateFlow<CharactersState<List<ApiCharacter>>>(CharactersState.Init)
+        MutableStateFlow<CharactersState<List<ApiCharacter>>>(CharactersState.Loading)
     val characters = _charactersState.asStateFlow()
 
     fun handleIntent(intent: CharactersIntent) {

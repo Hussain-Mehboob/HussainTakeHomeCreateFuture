@@ -16,7 +16,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -33,7 +32,9 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -57,23 +58,22 @@ fun CharactersListScreen() {
         viewModel.handleIntent(CharactersIntent.GetCharactersList)
     }
 
-    MaterialTheme {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .paint(
-                    painterResource(id = R.drawable.img_characters),
-                    contentScale = ContentScale.FillBounds
-                )
-        ) {
-            when (charactersState) {
-                is CharactersState.Error -> ErrorDialog(errorMessage = charactersState.error) { /*Do Nothing*/ }
-                is CharactersState.GetCharactersListSuccess -> CharacterListScreen(characters = charactersState.data)
-                CharactersState.Init -> {}
-                CharactersState.Loading -> CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center).testTag("loadingIndicator")
-                )
-            }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .paint(
+                painterResource(id = R.drawable.img_characters),
+                contentScale = ContentScale.FillBounds
+            )
+    ) {
+        when (charactersState) {
+            is CharactersState.Error -> ErrorDialog(errorMessage = charactersState.error) { /*Do Nothing*/ }
+            is CharactersState.GetCharactersListSuccess -> CharacterListScreen(characters = charactersState.data)
+            CharactersState.Loading -> CircularProgressIndicator(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .testTag("loadingIndicator")
+            )
         }
     }
 }
@@ -119,9 +119,9 @@ fun SearchTextField(value: String, onValueChange: (String) -> Unit) {
     TextField(
         value = value,
         onValueChange = { onValueChange(it) },
-        placeholder = { Text("Search") },
+        placeholder = { Text(stringResource(id = R.string.search_placeholder)) },
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(10.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.card_corner_radius)),
         singleLine = true,
         colors = TextFieldDefaults.colors(
             focusedTextColor = Color.White,
@@ -142,7 +142,7 @@ fun CharacterItem(character: ApiCharacter, onItemClick: () -> Unit = {}) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 8.dp, bottom = 4.dp),
+            .padding(top = dimensionResource(id = R.dimen.spacing_small), bottom = dimensionResource(id = R.dimen.spacing_small)),
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent
         ),
@@ -161,9 +161,9 @@ fun CharacterItem(character: ApiCharacter, onItemClick: () -> Unit = {}) {
                     fontSize = 20.sp
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                LabelValue(label = "Culture: ", value = character.culture)
-                LabelValue(label = "Born: ", value = character.born)
-                LabelValue(label = "Died: ", value = character.died)
+                LabelValue(label = stringResource(id = R.string.culture_label), value = character.culture)
+                LabelValue(label = stringResource(id = R.string.born_label), value = character.born)
+                LabelValue(label = stringResource(id = R.string.died_label), value = character.died)
             }
 
             Spacer(modifier = Modifier.width(16.dp))
@@ -171,7 +171,7 @@ fun CharacterItem(character: ApiCharacter, onItemClick: () -> Unit = {}) {
             // Right Section
             Column(horizontalAlignment = Alignment.End, modifier = Modifier.weight(0.6f)) {
                 Text(
-                    text = "Seasons:",
+                    text = stringResource(id = R.string.seasons_label),
                     color = Color.White,
                     fontWeight = FontWeight.Normal,
                     fontSize = 16.sp
