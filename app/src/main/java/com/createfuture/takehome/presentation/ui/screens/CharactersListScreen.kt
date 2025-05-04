@@ -177,7 +177,7 @@ fun CharacterItem(character: ApiCharacter, onItemClick: () -> Unit = {}) {
                     fontSize = 16.sp
                 )
                 Text(
-                    text = character.seasons,
+                    text = character.seasons.takeUnless { it.isNullOrBlank() } ?: "N/A",
                     color = Color.Gray,
                     fontWeight = FontWeight.Normal,
                     fontSize = 14.sp,
@@ -196,7 +196,7 @@ fun LabelValue(label: String, value: String) {
             text = label, color = Color.White, fontSize = 16.sp
         )
         Text(
-            text = value,
+            text = value.takeUnless { it.isNullOrBlank() } ?: "N/A",
             color = Color.Gray,
             fontSize = 16.sp,
             maxLines = 1,
