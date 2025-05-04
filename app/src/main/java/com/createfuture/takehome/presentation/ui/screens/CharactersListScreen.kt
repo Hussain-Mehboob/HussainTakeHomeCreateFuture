@@ -11,15 +11,22 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
@@ -60,23 +67,7 @@ fun CharactersListScreen() {
         ) {
             when (charactersState) {
                 is CharactersState.Error -> ErrorDialog(errorMessage = charactersState.error) { /*Do Nothing*/ }
-                is CharactersState.GetCharactersListSuccess -> {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 12.dp, vertical = 6.dp)
-                    ) {
-                        with(charactersState.data) {
-                            items(this) { character ->
-                                CharacterItem(character) {
-                                    //Do Nothing On Click
-                                }
-                                HorizontalDivider(color = Color.Gray.copy(alpha = 0.4f))
-                            }
-                        }
-                    }
-                }
-
+                is CharactersState.GetCharactersListSuccess -> CharacterListScreen(characters = charactersState.data)
                 CharactersState.Init -> {}
                 CharactersState.Loading -> CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center)
@@ -84,6 +75,65 @@ fun CharactersListScreen() {
             }
         }
     }
+}
+
+@Composable
+fun CharacterListScreen(characters: List<ApiCharacter>) {
+    var searchText by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 12.dp, vertical = 6.dp)
+    ) {
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        SearchTextField(value = searchText) {
+            searchText = it
+        }
+
+        Spacer(modifier = Modifier.height(14.dp))
+
+        val filteredCharacters = characters.filter {
+            /* this can be modified to start with method as well to search based on character's firstname only */
+            it.name.contains(searchText, ignoreCase = true)
+        }
+
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            with(filteredCharacters) {
+                items(this) { character ->
+                    CharacterItem(character) { /*Do Nothing On Click*/ }
+                    HorizontalDivider(color = Color.Gray.copy(alpha = 0.3f))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun SearchTextField(value: String, onValueChange: (String) -> Unit) {
+    TextField(
+        value = value,
+        onValueChange = { onValueChange(it) },
+        placeholder = { Text("Search") },
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(10.dp),
+        singleLine = true,
+        colors = TextFieldDefaults.colors(
+            focusedTextColor = Color.White,
+            unfocusedTextColor = Color.White,
+            focusedPlaceholderColor = Color.White,
+            unfocusedPlaceholderColor = Color.White,
+            cursorColor = Color.White,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedContainerColor = Color.LightGray.copy(alpha = 0.3f),
+            unfocusedContainerColor = Color.LightGray.copy(alpha = 0.3f),
+        )
+    )
 }
 
 @Composable
@@ -118,7 +168,7 @@ fun CharacterItem(character: ApiCharacter, onItemClick: () -> Unit = {}) {
             Spacer(modifier = Modifier.width(16.dp))
 
             // Right Section
-            Column(horizontalAlignment = Alignment.End, modifier = Modifier.weight(0.3f)) {
+            Column(horizontalAlignment = Alignment.End, modifier = Modifier.weight(0.6f)) {
                 Text(
                     text = "Seasons:",
                     color = Color.White,
