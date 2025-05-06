@@ -35,6 +35,10 @@ SonarQube
 - Add Dark/Light Theme Support for better UI/UX
 - Add feature branches instead of pushing directly to main branch or any single branch as the codebase grows
 
+## APK:
+
+https://drive.google.com/file/d/1L64hhJ8jxqDf1MvuaznZNtEwBIS5SM3I/view?usp=sharing
+
 ## Demo Video:
 
 https://github.com/user-attachments/assets/e6bba8b9-572b-410e-8241-17c7e4d0097f
