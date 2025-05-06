@@ -1,16 +1,52 @@
-# HussainTakeHomeCreateFuture
-# Tech Test
+# GOT App created by Hussain Mehboob for Create Future Tech Task
 
-You have been provided with an in-development Android app. The application uses an API to display lists of data about characters from the show "Game of Thrones". The project has some bugs and notable UI mismatches compared to the given designs.
+## Project Configuration
+
+Following lines have been added in this project's "local.properties" file:
+
+```
+BASE_URL=https://yj8ke8qonl.execute-api.eu-west-1.amazonaws.com
+AUTH_TOKEN=Bearer 754t!si@glcE2qmOFEcN
+```
+
+### Note:
+
+Base URL and Auth Token have been put in the local.properties file to help, if we want to move towards CI/CD and to keep credentials secure and configureable.
+
+## Android Component and Tech Used:
+
+AndroidX, Jetpack Compose, Material 3, Coroutines, Hilt, Clean Architecture, MVI, Okhttp, Retrofit, Gson
+
+## Unit Testing:
+
+Junit4, MockK, Kotlin Coroutines Test Library
+
+## Compose UI Testing:
+
+Compose UI Testing Library
 
 ## Some issues that have been reported
 
-- App crashes on launch
-- Major discrepancies with the designs e.g. white padding
+- App crashes on launch --> Fixed
+- Major discrepancies with the designs e.g. white padding --> Fixed
+
+## Code Quality:
+
+SonarQube
+
+## Next Steps:
+
+- Setup CI/CD <br>
+- Add Dark/Light Theme Support for better UI/UX
+- Add feature branches instead of pushing directly to main branch or any single branch as the codebase grows
+
+## Task Requirements:
+
+You have been provided with an in-development Android app. The application uses an API to display lists of data about characters from the show "Game of Thrones". The project has some bugs and notable UI mismatches compared to the given designs.
 
 ## Improvements required
 
-- A new feature needs to be added that would allow a user to search the list by character name.
+- A new feature needs to be added that would allow a user to search the list by character name. --> Done
 
 ## Resources
 
@@ -23,7 +59,7 @@ Designs:
 
 ![img_design_1.png](app%2Fsrc%2Fmain%2Fres%2Fdrawable%2Fimg_design_1.png) ![img_design_2.png](app%2Fsrc%2Fmain%2Fres%2Fdrawable%2Fimg_design_2.png)
 
-## Criteria on which we will assess your submission
+## Criteria on which we will assess your submission --> Done
 
 - Closeness to designs (pragmatism is encouraged and pixel perfection is NOT required)
 - Code quality, included but not limited to, design patterns and organisation of the application code
