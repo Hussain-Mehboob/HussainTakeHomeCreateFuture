@@ -1,12 +1,12 @@
-# GOT App created by Hussain Mehboob for Create Future Tech Task
+# GOT App by Hussain Mehboob for CreateFuture Tech Task
 
 ## Project Configuration
 
 Following lines have been added in this project's "local.properties" file:
 
 ```
-BASE_URL=https://yj8ke8qonl.execute-api.eu-west-1.amazonaws.com
-AUTH_TOKEN=Bearer 754t!si@glcE2qmOFEcN
+BASE_URL = https://yj8ke8qonl.execute-api.eu-west-1.amazonaws.com
+AUTH_TOKEN = Bearer 754t!si@glcE2qmOFEcN
 ```
 
 ### Note:
@@ -21,14 +21,9 @@ AndroidX, Jetpack Compose, Material 3, Coroutines, Hilt, Clean Architecture, MVI
 
 Junit4, MockK, Kotlin Coroutines Test Library
 
-## Compose UI Testing:
+## UI Testing:
 
 Compose UI Testing Library
-
-## Some issues that have been reported
-
-- App crashes on launch --> Fixed
-- Major discrepancies with the designs e.g. white padding --> Fixed
 
 ## Code Quality:
 
@@ -40,9 +35,27 @@ SonarQube
 - Add Dark/Light Theme Support for better UI/UX
 - Add feature branches instead of pushing directly to main branch or any single branch as the codebase grows
 
+## Demo Video:
+
+https://github.com/user-attachments/assets/e6bba8b9-572b-410e-8241-17c7e4d0097f
+
+## Screenshots:
+
+![GOT-WithSearch](https://github.com/user-attachments/assets/996b159f-0453-497f-b8bd-59a47a9053b3)
+![GOT-Loading](https://github.com/user-attachments/assets/a6a9e842-e8c6-42fc-bab5-9b271a7e5a52)
+![GOT-FilteredList](https://github.com/user-attachments/assets/7840d786-16b8-4ea9-96bf-b846a7a5d7f0)
+![GOT-ErrorDialog](https://github.com/user-attachments/assets/660a0a2e-11b0-4d3a-b65f-5dac42f45d7c)
+
+=================================================================================================
+
 ## Task Requirements:
 
 You have been provided with an in-development Android app. The application uses an API to display lists of data about characters from the show "Game of Thrones". The project has some bugs and notable UI mismatches compared to the given designs.
+
+## Some issues that have been reported
+
+- App crashes on launch --> Fixed
+- Major discrepancies with the designs e.g. white padding --> Fixed
 
 ## Improvements required
 
